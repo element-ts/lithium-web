@@ -8,9 +8,9 @@
 
 import {
 	LiCommandRegistry,
-	LiCommandRegistryStructure
-} from "..";
-import {LiSocket} from "../core/LiSocket";
+	LiCommandRegistryStructure,
+	LiSocket
+} from "@element-ts/lithium-core";
 
 export class LiWebSocket<
 	LC extends LiCommandRegistryStructure<LC>,

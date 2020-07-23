@@ -30,7 +30,9 @@
 		"url": "https://github.com/elijahjcobb/***/issues"
 	},
 	"homepage": "https://github.com/elijahjcobb/***#readme",
-	"dependencies": {},
+	"dependencies": {
+		"@element-ts/lithium-core": "0.1.0"
+	},
 	"devDependencies": {
 		"@types/node": "latest",
 		"typescript": "latest",
