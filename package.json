@@ -31,7 +31,8 @@
 	},
 	"homepage": "https://github.com/elijahjcobb/***#readme",
 	"dependencies": {
-		"@element-ts/lithium-core": "0.1.0"
+		"@element-ts/lithium-core": "0.1.0",
+		"@elijahjcobb/prom-type": "latest"
 	},
 	"devDependencies": {
 		"@types/node": "latest",
