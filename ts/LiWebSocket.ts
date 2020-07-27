@@ -34,8 +34,13 @@ export class LiWebSocket<
 		}
 
 		super({
-			close: socket.close,
-			send: socket.send,
+			close: (): void => {
+				socket.close();
+			},
+			send: (data: string, handler: () => void): void => {
+				socket.send(data);
+				handler();
+			},
 			onMessage: (handler: (data: any) => void): void => {
 				socket.onmessage = ((event: MessageEvent): void => {
 					handler(event.data);
