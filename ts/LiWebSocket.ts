@@ -26,7 +26,7 @@ export class LiWebSocket<
 	SC extends LiCommandRegistryStructure<SC> = any
 	> extends LiSocket<LC, RC, SC> {
 
-	private constructor(config: LiWebSocketConfig, socket: WebSocket, commandRegistry?: LiCommandRegistry<LC>, id: string = "", onDidReceiveId: ((() => void) | undefined) = undefined, allowPeerToPeer: boolean = false, debug?: boolean) {
+	private constructor(config: LiWebSocketConfig, socket: WebSocket, commandRegistry?: LiCommandRegistry<LC, RC>, id: string = "", onDidReceiveId: ((() => void) | undefined) = undefined, allowPeerToPeer: boolean = false, debug?: boolean) {
 
 		if (config.debug) {
 			LiWebSocket.logger.enable();
