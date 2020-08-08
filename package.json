@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/element-ts/lithium-web#readme",
   "dependencies": {
-    "@element-ts/lithium-core": "0.1.3",
+    "@element-ts/lithium-core": "0.1.4",
     "@elijahjcobb/prom-type": "latest"
   },
   "devDependencies": {
