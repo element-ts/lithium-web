@@ -26,6 +26,8 @@ export class LiWebSocket<
 	SC extends LiCommandRegistryStructure<SC> = any
 	> extends LiSocket<LC, RC, SC> {
 
+	private socket: WebSocket;
+
 	private constructor(config: LiWebSocketConfig, socket: WebSocket, commandRegistry?: LiCommandRegistry<LC, RC>, id: string = "", onDidReceiveId: ((() => void) | undefined) = undefined, allowPeerToPeer: boolean = false, debug?: boolean) {
 
 		if (config.debug) {
@@ -33,31 +35,26 @@ export class LiWebSocket<
 			LiWebSocket.logger.setTitle("@element-ts/lithium LiWebSocket");
 		}
 
-		super({
-			close: (): void => {
-				socket.close();
-			},
-			send: (data: string, handler: () => void): void => {
-				socket.send(data);
-				handler();
-			},
-			onMessage: (handler: (data: any) => void): void => {
-				socket.onmessage = ((event: MessageEvent): void => {
-					handler(event.data);
-				});
-			},
-			onError: (handler: (err: Error) => void): void => {
-				socket.onerror = ((event: Event): void => {
-					handler(new Error("An error occurred in socket."));
-				});
-			},
-			onClose: (handler: (code?: number, reason?: string) => void): void => {
-				socket.onclose = ((event: CloseEvent): void => {
-					handler(event.code, event.reason);
-				});
-			}
-		}, commandRegistry, id, onDidReceiveId, allowPeerToPeer, debug);
+		super(commandRegistry, id, onDidReceiveId, allowPeerToPeer, debug);
 
+		this.socket = socket;
+		this.socket.onmessage = (ev: MessageEvent): void => this.handleOnMessage(ev.data);
+		this.socket.onclose = (ev: CloseEvent): void => this.handleOnClose(ev.code, ev.reason);
+		this.socket.onerror = (ev: Event): void => {
+			console.error(ev);
+			this.handleOnError(new Error("The socket closed with an error. Check stderr."));
+		};
+	}
+
+
+
+	protected handleClose(): void {
+		this.socket.close();
+	}
+
+	protected handleSend(data: string, handler: (err?: Error) => void): void {
+		this.socket.send(data);
+		handler();
 	}
 
 	public static init<LC extends LiCommandRegistryStructure<LC>, RC extends LiCommandRegistryStructure<RC>, SC extends LiCommandRegistryStructure<SC> = any>(config: LiWebSocketConfig): Promise<LiWebSocket<LC, RC, SC>> {

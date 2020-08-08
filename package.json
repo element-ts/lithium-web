@@ -1,6 +1,6 @@
 {
   "name": "@element-ts/lithium-web",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A package to template lorem ipsum.",
   "keywords": [],
   "main": "js/index",
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/element-ts/lithium-web#readme",
   "dependencies": {
-    "@element-ts/lithium-core": "0.1.4",
+    "@element-ts/lithium-core": "0.1.5",
     "@elijahjcobb/prom-type": "latest"
   },
   "devDependencies": {
